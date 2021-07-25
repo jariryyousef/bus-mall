@@ -1,0 +1,23 @@
+body{
+height: 100%;
+width: 100%;
+
+}
+
+h1{
+    text-align: center;
+}
+
+#firstp{
+
+    text-align: center;
+    background-color: darkseagreen;
+ 
+}
+
+div{
+    border: black solid 3px;
+
+
+}
+
