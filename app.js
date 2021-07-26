@@ -3,17 +3,17 @@
 let first = document.getElementById('one');
 let second = document.getElementById('two');
 let final = document.getElementById('three');
-
-// console.log(first,second,final);
-
-
 let firstindex;
 let secondindex;
 let finalindex;
-let btn=document.getElementById('show');
-
+let btn = document.getElementById('show');
 let maxtry = 25;
 let countusertry = 0;
+let numberofof=[];
+
+let namesArr = [];
+let votesArr = [];
+let shownArr=[];    
 
 function Bus(name, src) {
     this.name = name;
@@ -21,7 +21,10 @@ function Bus(name, src) {
     this.votes = 0;
     this.shown = 0;
     buss.all.push(this);
-    // buss.push(this);
+    namesArr.push(this.name);
+    numberofof.push(this);
+    // thisround.all.push(this);//test
+
 }
 
 let buss = [];
@@ -47,66 +50,77 @@ new Bus('unicorn', 'assets/unicorn.jpg');
 new Bus('water-can', 'assets/water-can.jpg');
 new Bus('wine-glass', 'assets/wine-glass.jpg');
 
-// console.log(buss.all);
-
-
 // from sameer demo
 function getRandomIndex() {
 
     return Math.floor(Math.random() * buss.all.length);
 }
 
-//   console.log(getRandomIndex());
 
-
+    // secondindex = getRandomIndex();
+    
+  
 function renderimg() {
 
     firstindex = getRandomIndex();
     secondindex = getRandomIndex();
     finalindex = getRandomIndex();
 
+    numberofof=[firstindex,secondindex,finalindex];
 
-    if (firstindex === secondindex) {
+  
+// Better code modification and add includes
+
+    while (firstindex===secondindex ||firstindex===finalindex ||finalindex===secondindex || numberofof.includes(firstindex) || numberofof.includes(secondindex) || numberofof.includes(finalindex)) {
+
 
         firstindex = getRandomIndex();
-        console.log('test change first');
-    }
-     if (secondindex === firstindex) {
-
         secondindex = getRandomIndex();
-        console.log('test change first1');
-    }
-     if (firstindex === finalindex) {
-        // firstindex=getRandomIndex();
         finalindex = getRandomIndex();
-        console.log('test change second');
-    }
 
-     if (secondindex === finalindex) {
-        secondindex = getRandomIndex();
-        console.log('test change final');
+           
     }
+    console.log(numberofof);
 
-     if (finalindex === secondindex) {
-        finalindex = getRandomIndex();
-        console.log('test change 4');
-    }
+
+
+    // if (firstindex === secondindex) {
+
+    //     firstindex = getRandomIndex();
+    //     console.log('test change first');
+    // }
+    // if (secondindex === firstindex) {
+
+    //     secondindex = getRandomIndex();
+    //     console.log('test change first1');
+    // }
+    // if (firstindex === finalindex) {
+    //     finalindex = getRandomIndex();
+    //     console.log('test change second');
+    // }
+
+    // if (secondindex === finalindex) {
+    //     secondindex = getRandomIndex();
+    //     console.log('test change final');
+    // }
+
+    // if (finalindex === secondindex) {
+    //     finalindex = getRandomIndex();
+    //     console.log('test change 4');
+    // }
+
 
     first.src = buss.all[firstindex].source;
     buss.all[firstindex].shown++;
-    // console.log(first.src);
+
     second.src = buss.all[secondindex].source;
     buss.all[secondindex].shown++;
-    // console.log(second.src);
+
     final.src = buss.all[finalindex].source;
     buss.all[finalindex].shown++;
-    // console.log(final.src);
+
 }
-
-// console.log(buss.all[2].name);
 renderimg()
-// console.log(renderimg());
-
 
 first.addEventListener('click', handleUserClick);
 second.addEventListener('click', handleUserClick);
@@ -115,100 +129,118 @@ final.addEventListener('click', handleUserClick);
 
 function handleUserClick(event) {
 
-    console.log(event.target.id);
+    // console.log(event.target.id);
     countusertry++;
 
-    // console.log(countusertry);
-
-
-    if (countusertry < maxtry) {
-
-        // console.log('test');
+    if (countusertry <= maxtry) {
 
         if (event.target.id === 'one') {
 
             buss.all[firstindex].votes++;
 
-            console.log(buss.all[firstindex]);
+            // console.log(buss.all[firstindex]);
 
         }
 
         else if (event.target.id === 'two') {
 
             buss.all[secondindex].votes++;
-            console.log(buss.all[secondindex]);
-
-
-
-
+            // console.log(buss.all[secondindex]);
         }
 
         else if (event.target.id === 'three') {
 
             buss.all[finalindex].votes++;
 
-            console.log(buss.all[finalindex]);
-
-
-
-
+            // console.log(buss.all[finalindex]);
         }
         renderimg()
 
     }
     else {
-
-        
-        // function myfunction() {
-      
-        
         alert('click on View Results to see Results');
 
-        // let button=getElementById('show');
-
-        
-            
-        
-        // let list = document.getElementById('result');
-
-
-            // for (let i = 0; i < buss.all.length; i++) {
-            //     let item = document.createElement('li');
-
-            //     list.appendChild(item);
-
-            //     item.textContent = `${buss.all[i].name} has ${buss.all[i].votes} votes and has ${buss.all[i].shown} shown`
-            //  }        
-        
-        // }
-        // console.log(myfunction());
-      
         first.removeEventListener('click', handleUserClick);
         second.removeEventListener('click', handleUserClick);
         final.removeEventListener('click', handleUserClick);
-        
+    
 
 
-
-
-
-
-    }
-}
-
-btn.addEventListener('click',addresuli)
+btn.addEventListener('click', addresuli)
 
 function addresuli(event) {
     let list = document.getElementById('result');
     for (let i = 0; i < buss.all.length; i++) {
         let item = document.createElement('li');
-    list.appendChild(item);
-  
+        list.appendChild(item);
+
         item.textContent = `${buss.all[i].name} had ${buss.all[i].votes} votes and was seen ${buss.all[i].shown} times`
+
+        btn.removeEventListener('click', addresuli);
+
+
+    }
+}
+for (let i = 0; i < buss.all.length; i++) {
+    votesArr.push(buss.all[i].votes);
+    shownArr.push(buss.all[i].shown);
     
-        btn.removeEventListener('click',addresuli);
+  }
+showChart();
 }
 }
 
 
 
+// using sameer demo
+function showChart() {
+
+    const data = {
+      labels: namesArr,
+      datasets: [{
+        label: 'Votes',
+        data: votesArr,
+        backgroundColor: [
+          'aqua',
+        ],
+
+        borderColor: [
+          'black',
+        ],
+        borderWidth: 1
+      },
+      {
+        label: 'Shown',
+        data: shownArr,
+        backgroundColor: [
+            'yellow',
+        ],
+        borderColor: [
+          'red',
+         
+        ],
+        borderWidth: 1
+      }
+    
+    ]
+    };
+  
+    const config = {
+      type:'bar',
+      data: data,
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      },
+    };
+  
+  
+    var myChart = new Chart(
+      document.getElementById('myChart'),
+      config
+    );
+  
+  }
