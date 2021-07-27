@@ -22,7 +22,7 @@ function Bus(name, src) {
     this.shown = 0;
     buss.all.push(this);
     namesArr.push(this.name);
-    numberofof.push(this);
+    // numberofof.push(this);
     // thisround.all.push(this);//test
 
 }
@@ -66,12 +66,12 @@ function renderimg() {
     secondindex = getRandomIndex();
     finalindex = getRandomIndex();
 
-    numberofof=[firstindex,secondindex,finalindex];
+    
 
   
 // Better code modification and add includes
 
-    while (firstindex===secondindex ||firstindex===finalindex ||finalindex===secondindex || numberofof.includes(firstindex) || numberofof.includes(secondindex) || numberofof.includes(finalindex)) {
+    while (firstindex===secondindex ||firstindex===finalindex ||finalindex===secondindex || numberofof.includes(firstindex)||numberofof.includes(secondindex) || numberofof.includes(finalindex)) {
 
 
         firstindex = getRandomIndex();
@@ -80,6 +80,7 @@ function renderimg() {
 
            
     }
+    numberofof=[firstindex,secondindex,finalindex];
     console.log(numberofof);
 
 
