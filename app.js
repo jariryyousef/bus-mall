@@ -10,10 +10,10 @@ let btn = document.getElementById('show');
 let maxtry = 25;
 let countusertry = 0;
 let numberofof=[];
-
 let namesArr = [];
 let votesArr = [];
-let shownArr=[];    
+let shownArr=[];   
+
 
 function Bus(name, src) {
     this.name = name;
@@ -23,9 +23,11 @@ function Bus(name, src) {
     buss.all.push(this);
     namesArr.push(this.name);
     // numberofof.push(this);
-    // thisround.all.push(this);//test
+    // Bus.votesnewarr.push(this);
+
 
 }
+// Bus.votesnewarr=[];
 
 let buss = [];
 buss.all = [];
@@ -155,7 +157,8 @@ function handleUserClick(event) {
 
             // console.log(buss.all[finalindex]);
         }
-        renderimg()
+        storage();
+        renderimg();
 
     }
     else {
@@ -179,7 +182,6 @@ function addresuli(event) {
 
         btn.removeEventListener('click', addresuli);
 
-
     }
 }
 for (let i = 0; i < buss.all.length; i++) {
@@ -187,10 +189,28 @@ for (let i = 0; i < buss.all.length; i++) {
     shownArr.push(buss.all[i].shown);
     
   }
+  // storage()
 showChart();
 }
 }
 
+
+
+function storage() {
+  let stringarr= JSON.stringify(buss.all);
+  localStorage.setItem('yousef',stringarr);
+  // console.log(localStorage.getItem('stringarr'));
+}
+function getstorage() {
+  let data=localStorage.getItem('yousef');
+  let parsedArr=JSON.parse(data);
+
+  if (parsedArr !==null) {
+    let newarr=JSON.parse(data)
+    buss.all=newarr;
+  }
+
+}
 
 
 // using sameer demo
@@ -245,3 +265,4 @@ function showChart() {
     );
   
   }
+  getstorage()
